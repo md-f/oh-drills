@@ -21,7 +21,7 @@ Focuses on computational logic (Python/TypeScript) with durations of 5m (warm-up
 ```text
 ┌────────────────────────────────────────────────────────────────────────┐
 │  Step 1: Trigger Algorithmic Drill                                     │
-│  You type: /algo-drill 15 python                                       │
+│  You type: /algo-drill 15m python                                      │
 │                                                                        │
 │  The LLM generates a problem and creates a new directory:              │
 │  `drills/python/00X_15m_topic/` containing `drill.md` and              │
@@ -52,7 +52,7 @@ Focuses on data engineering (Marimo/Polars) using 5m (warm-up), 15m (standard), 
 ```text
 ┌────────────────────────────────────────────────────────────────────────┐
 │  Step 1: Trigger Data Drill                                            │
-│  You type: /data-drill 15                                              │
+│  You type: /data-drill 15m                                             │
 │                                                                        │
 │  The LLM generates a problem and creates a new directory:              │
 │  `drills/data/00X_15m_topic/` containing `drill.md` and                │
