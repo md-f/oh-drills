@@ -29,28 +29,30 @@ Act as a senior data engineer. Generate a data transformation task based on the 
   - Structure Blueprint:
 
     ```python
-    import marimo as mo
-    import polars as pl
+    import marimo
+    app = marimo.App(width="full")
 
-    @mo.cell
-    def setup():
+    @app.cell
+    def _():
+        import marimo as mo
+        import polars as pl
         return mo, pl
 
-    @mo.cell
-    def generate_data():
+    @app.cell
+    def _(mo, pl):
         # Generate a representative mock dataset
         df = pl.DataFrame(...)
         return df
 
-    @mo.cell
-    def task():
+    @app.cell
+    def _(mo, pl):
         # TASK: Implement the transformation logic here
         def solve(df: pl.DataFrame) -> pl.DataFrame:
             return df
         return solve
 
-    @mo.cell
-    def inspection():
+    @app.cell
+    def _(mo, pl):
         # To inspect the results, call the solve function:
         # mo.ui.table(solve(df))
         pass
