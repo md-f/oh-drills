@@ -1,13 +1,10 @@
 description: Generate a Data Engineering drill (5m, 15m, or 45m) in a Marimo notebook
 
-Act as a senior data engineer. Generate a data transformation task based on the requested duration and language (Python/Polars recommended) via $ARGUMENTS.
+Act as a senior data engineer. Generate a data transformation task based on the requested duration via $ARGUMENTS.
 
 1. **Parse Input**:
 
 - Identify Duration (5, 15, or 45).
-- Assume Python if unspecified.
-
-1. **Branching Logic**:
 
 #### IF DURATION IS 5m (Warm-up Mode)
 
@@ -28,12 +25,36 @@ Act as a senior data engineer. Generate a data transformation task based on the 
   - Create a new directory: `drills/data/<index>_<duration>m_<slug>/`.
 - **File Writing**:
   - Write `drill.md` inside the folder containing the problem statement and requirements.
-  - Write `drill.py` inside the folder. This must be a **Marimo notebook** formatted as a Python file.
-    - It MUST include:
-      1. `import marimo as mo` and `import polars as pl`.
-      2. A cell that generates a representative mock dataset (e.g., a dictionary converted to a Polars DataFrame).
-      3. A cell clearly marked with `# TASK` containing a placeholder function for the user to implement.
-      4. A cell that uses `mo.ui.table(df)` or `print(df)` to inspect the results.
+  - Write `drill.py` inside the folder. This must be a **Marimo notebook** formatted as a Python file using `@mo.cell` decorators.
+  - Structure Blueprint:
+
+    ```python
+    import marimo as mo
+    import polars as pl
+
+    @mo.cell
+    def setup():
+        return mo, pl
+
+    @mo.cell
+    def generate_data():
+        # Generate a representative mock dataset
+        df = pl.DataFrame(...)
+        return df
+
+    @mo.cell
+    def task():
+        # TASK: Implement the transformation logic here
+        def solve(df: pl.DataFrame) -> pl.DataFrame:
+            return df
+        return solve
+
+    @mo.cell
+    def inspection():
+        # To inspect the results, call the solve function:
+        # mo.ui.table(solve(df))
+        pass
+    ```
 
 1. **Output Format (for all modes)**:
 
